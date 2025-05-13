@@ -50,7 +50,7 @@
 
 ```bash
 # Pull the image
-docker pull yourusername/linkedin-agent:latest
+docker pull canerskrc/linkedin-agent:latest
 
 # Run with Docker Compose
 docker-compose up -d
