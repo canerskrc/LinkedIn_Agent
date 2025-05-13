@@ -1,0 +1,2 @@
+textblob==0.17.1
+typing-extensions==4.7.1 

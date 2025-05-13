@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linkedin-agent
+  labels:
+    app: linkedin-agent
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: linkedin-agent
+  template:
+    metadata:
+      labels:
+        app: linkedin-agent
+    spec:
+      containers:
+      - name: linkedin-agent
+        image: ${DOCKER_REGISTRY}/linkedin-agent:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DB_PATH
+          value: "/app/data/linkedin_agent.db"
+        volumeMounts:
+        - name: data-volume
+          mountPath: /app/data
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import sqlite3; sqlite3.connect('/app/data/linkedin_agent.db')"
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import sqlite3; sqlite3.connect('/app/data/linkedin_agent.db')"
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      volumes:
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: linkedin-agent-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: linkedin-agent
+spec:
+  selector:
+    app: linkedin-agent
+  ports:
+  - port: 80
+    targetPort: 8000
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: linkedin-agent-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi 
