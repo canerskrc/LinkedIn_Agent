@@ -60,7 +60,7 @@ docker-compose up -d
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/linkedin-agent.git
+git clone https://github.com/canerskrc/linkedin-agent.git
 cd linkedin-agent
 
 # Create virtual environment
@@ -137,10 +137,8 @@ Give a star if this project helped you!
 
 ## Contact
 
-- **Website**: [yourwebsite.com](https://yourwebsite.com)
-- **Email**: your.email@example.com
-- **Twitter**: [@yourusername](https://twitter.com/yourusername)
-- **LinkedIn**: [Your Name](https://linkedin.com/in/yourusername)
+- **Email**: canersekerci@cnraihub.co
+- **LinkedIn**: (https://linkedin.com/in/canersekerci)
 
 ## Acknowledgments
 
@@ -151,5 +149,5 @@ Give a star if this project helped you!
 ---
 
 <p align="center">
-Made with ❤️ by <a href="https://github.com/yourusername">Your Name</a>
+Made with ❤️ by <a href="https://github.com/canerskrc">Caner SEKERCI</a>
 </p> 
